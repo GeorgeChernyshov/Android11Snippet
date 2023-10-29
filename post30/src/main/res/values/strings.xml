@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Android11Snippet-post30</string>
+
+    <!-- screen labels -->
+<!--    <string name="label_permissions">Permissions</string>-->
+    <string name="label_storage">Storage</string>
+
+    <!-- storage -->
+    <string name="storage_favorite_unavailable">Favorites are unavailable until Android 11</string>
+    <string name="storage_open_document_new_hint">Android/data and Android/obb directories should be unavailable</string>
+    <string name="storage_open_document_old_hint">Try opening Android/data or Android/obb directory</string>
+    <string name="storage_open_document_test">Test OPEN_DOCUMENT</string>
+    <string name="storage_open_document_tree_new_hint">Download directory should be unavailable</string>
+    <string name="storage_open_document_tree_old_hint">Try opening Download directory</string>
+    <string name="storage_open_document_tree_test">Test OPEN_DOCUMENT_TREE</string>
+    <string name="storage_select_favorite_media">Add media to favorite</string>
+</resources>
