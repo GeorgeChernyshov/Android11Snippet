@@ -29,7 +29,8 @@ import java.util.ArrayList
 
 @Composable
 fun StorageScreen(
-    viewModel: StorageViewModel = viewModel()
+    viewModel: StorageViewModel = viewModel(),
+    onNextClicked: () -> Unit
 ) {
     Scaffold(
         topBar = { AppBar(name = stringResource(id = Screen.Storage.resourceId)) },
@@ -40,6 +41,13 @@ fun StorageScreen(
                 }
 
                 DocumentAccessView(modifier = Modifier.padding(top = 16.dp))
+                
+                Button(
+                    modifier = Modifier.padding(top = 16.dp),
+                    onClick = { onNextClicked.invoke() }
+                ) {
+                    Text(text = stringResource(id = R.string.button_go_next))
+                }
             }
         }
     )

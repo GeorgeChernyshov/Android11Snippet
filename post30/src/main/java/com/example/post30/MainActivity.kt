@@ -10,6 +10,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.post30.ui.AppViewModel
 import com.example.post30.ui.navigation.Screen
+import com.example.post30.ui.screen.location.LocationScreen
+import com.example.post30.ui.screen.permissions.PermissionsScreen
 import com.example.post30.ui.screen.storage.StorageScreen
 import com.example.post30.ui.theme.Android11SnippetTheme
 
@@ -26,8 +28,15 @@ fun App(
 ) {
     Android11SnippetTheme {
         when (viewModel.currentScreen.value) {
-            is Screen.Storage -> StorageScreen()
-//            is Screen.Permissions ->
+            is Screen.Storage -> StorageScreen {
+                viewModel.setCurrentScreen(Screen.Permissions)
+            }
+
+            is Screen.Permissions -> PermissionsScreen {
+                viewModel.setCurrentScreen(Screen.Location)
+            }
+
+            is Screen.Location -> LocationScreen()
         }
     }
 }

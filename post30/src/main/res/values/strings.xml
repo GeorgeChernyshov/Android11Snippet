@@ -2,8 +2,30 @@
     <string name="app_name">Android11Snippet-post30</string>
 
     <!-- screen labels -->
-<!--    <string name="label_permissions">Permissions</string>-->
+    <string name="label_location">Location</string>
+    <string name="label_permissions">Permissions</string>
     <string name="label_storage">Storage</string>
+
+    <!-- common buttons -->
+    <string name="button_go_next">Go Next</string>
+
+    <!-- location -->
+    <string name="location_background_permitted">Background location permission granted</string>
+    <string name="location_background_restricted">Background location permission denied</string>
+    <string name="location_foreground_permitted">Foreground location permission granted</string>
+    <string name="location_foreground_restricted">Foreground location permission denied</string>
+    <string name="location_request">Request location</string>
+    <string name="location_separate_request_hint">Try requesting background and foreground location separately</string>
+    <string name="location_simultaneous_request_hint">Try requesting background and foreground location simultaneously</string>
+
+    <!-- permissions -->
+    <string name="permissions_check_phone_number">Check phone number</string>
+    <string name="permissions_one_time_hint">Try requesting one-time permission</string>
+    <string name="permissions_read_phone_number_hint">READ_PHONE_NUMBER permission should be requested</string>
+    <string name="permissions_read_phone_state_hint">READ_PHONE_STATE permission should be requested</string>
+    <string name="permissions_request_multiple_times_hint">Try requesting the permission multiple times</string>
+    <string name="permissions_request_test">Request permission</string>
+    <string name="permissions_show_floating_window">Show floating window</string>
 
     <!-- storage -->
     <string name="storage_favorite_unavailable">Favorites are unavailable until Android 11</string>
