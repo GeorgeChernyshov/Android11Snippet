@@ -1,6 +1,7 @@
 package com.example.post30.ui.screen.storage
 
 import android.app.Activity
+import android.content.ClipData
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -64,11 +65,19 @@ fun FavoriteMediaButton(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
-            val clipData = result.data?.clipData ?: return@rememberLauncherForActivityResult
-
             val uris = ArrayList<Uri>()
-            for (i in 0 until clipData.itemCount)
-                uris.add(clipData.getItemAt(i).uri)
+
+            when {
+                result.data?.clipData != null -> {
+                    val clipData = result.data?.clipData!!
+                    for (i in 0 until clipData.itemCount)
+                        uris.add(clipData.getItemAt(i).uri)
+                }
+
+                result.data?.data != null -> uris.add(result.data?.data!!)
+
+                else -> return@rememberLauncherForActivityResult
+            }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 val editPendingIntent = MediaStore.createFavoriteRequest(context.contentResolver, uris, true)
