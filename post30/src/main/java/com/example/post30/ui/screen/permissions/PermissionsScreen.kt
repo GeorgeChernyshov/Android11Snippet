@@ -70,13 +70,11 @@ fun PermissionsScreen(
                     }
                 )
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    Button(
-                        modifier = Modifier.padding(top = 16.dp),
-                        onClick = { onNextClicked.invoke() }
-                    ) {
-                        Text(text = stringResource(id = R.string.button_go_next))
-                    }
+                Button(
+                    modifier = Modifier.padding(top = 16.dp),
+                    onClick = { onNextClicked.invoke() }
+                ) {
+                    Text(text = stringResource(id = R.string.button_go_next))
                 }
             }
         }

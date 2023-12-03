@@ -23,7 +23,10 @@ import com.example.post30.ui.components.AppBar
 import com.example.post30.ui.navigation.Screen
 
 @Composable
-fun LocationScreen(viewModel: LocationViewModel = viewModel()) {
+fun LocationScreen(
+    viewModel: LocationViewModel = viewModel(),
+    onNextClicked: () -> Unit
+) {
     viewModel.updatePermissions(
         foregroundLocationPermitted = (ContextCompat.checkSelfPermission(
             LocalContext.current,
@@ -62,6 +65,13 @@ fun LocationScreen(viewModel: LocationViewModel = viewModel()) {
                         viewModel.updatePermissions(backgroundLocationPermitted = it)
                     }
                 )
+
+                Button(
+                    modifier = Modifier.padding(top = 16.dp),
+                    onClick = { onNextClicked.invoke() }
+                ) {
+                    Text(text = stringResource(id = R.string.button_go_next))
+                }
             }
         }
     )

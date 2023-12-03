@@ -2,7 +2,9 @@
     <string name="app_name">Android11Snippet-post30</string>
 
     <!-- screen labels -->
+    <string name="label_conversations">Conversations</string>
     <string name="label_location">Location</string>
+    <string name="label_network">5G Capabilities</string>
     <string name="label_permissions">Permissions</string>
     <string name="label_storage">Storage</string>
 
@@ -17,6 +19,29 @@
     <string name="location_request">Request location</string>
     <string name="location_separate_request_hint">Try requesting background and foreground location separately</string>
     <string name="location_simultaneous_request_hint">Try requesting background and foreground location simultaneously</string>
+
+    <!-- network -->
+    <string name="network_bandwidth_downstream">Downstream bandwidth</string>
+    <string name="network_bandwidth_unknown">Unknown</string>
+    <string name="network_bandwidth_upstream">Upstream bandwidth</string>
+    <string name="network_five_g_check">Check 5G status</string>
+    <string name="network_five_g_lte_advanced_pro">5G type - Advanced pro LTE (5Ge)</string>
+    <string name="network_five_g_not">Not a 5G network</string>
+    <string name="network_five_g_not_checked">5G Check is not available until Android 11</string>
+    <string name="network_five_g_nr_nsa">5G type - NR (5G) for 5G Sub-6 networks</string>
+    <string name="network_five_g_nr_nsa_mmwave">5G type - (5G+/5G UW) for 5G mmWave networks</string>
+    <string name="network_meteredness_metered">Your network is metered</string>
+    <string name="network_meteredness_temp_unmetered">Your network is temporarily unmetered</string>
+    <string name="network_meteredness_unknown">Your network status is unknown</string>
+    <string name="network_meteredness_unmetered">Your network is unmetered</string>
+
+    <!-- notifications -->
+    <string name="notification_chat_channel_name">Chat Notification Channel</string>
+    <string name="notification_chat_channel_description">Chat channel description</string>
+    <string name="notification_reply">Reply Text. Refresh to check</string>
+    <string name="notification_send">Send notification</string>
+    <string name="notification_title">My Notification</string>
+    <string name="notification_text">Notification text</string>
 
     <!-- permissions -->
     <string name="permissions_check_phone_number">Check phone number</string>
