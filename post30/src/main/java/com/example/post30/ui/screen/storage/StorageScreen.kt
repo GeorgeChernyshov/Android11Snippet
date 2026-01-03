@@ -98,6 +98,9 @@ fun FavoriteMediaButton(
     }
 
     Column(modifier = Modifier.fillMaxWidth()) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
+            Text(stringResource(R.string.storage_favorite_available))
+
         Button(
             onClick = {
                 val intent = Intent(Intent.ACTION_PICK)

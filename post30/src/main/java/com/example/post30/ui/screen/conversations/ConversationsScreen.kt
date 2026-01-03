@@ -1,5 +1,6 @@
 package com.example.post30.ui.screen.conversations
 
+import android.os.Build
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
@@ -27,6 +28,12 @@ fun ConversationsScreen(
         topBar = { AppBar(name = stringResource(id = Screen.Conversations.resourceId)) },
         content = {
             Column(modifier = Modifier.padding(16.dp)) {
+                Text(stringResource(
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
+                        R.string.conversations_new
+                    else R.string.conversations_old
+                ))
+
                 ShowNotificationBlock(response = state.value.response)
             }
         }

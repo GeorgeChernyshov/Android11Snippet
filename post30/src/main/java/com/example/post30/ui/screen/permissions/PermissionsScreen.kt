@@ -88,15 +88,25 @@ fun RequestPermissionsBlock(modifier: Modifier = Modifier) {
     ) {}
 
     Column(modifier) {
-        Text(text = stringResource(id = R.string.permissions_one_time_hint))
+        Text(text = stringResource(
+            id = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
+                R.string.permissions_one_time_hint_new
+            else R.string.permissions_one_time_hint_old
+        ))
         
         Button(onClick = {
             requestPermissionLauncher.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
         }) {
             Text(text = stringResource(id = R.string.permissions_request_test))
         }
+
+        Text(stringResource(id = R.string.permissions_request_multiple_times_hint))
         
-        Text(text = stringResource(id = R.string.permissions_request_multiple_times_hint))
+        Text(text = stringResource(
+            id = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
+                R.string.permissions_request_multiple_times_new
+            else R.string.permissions_request_multiple_times_old
+        ))
     }
 }
 
@@ -114,6 +124,12 @@ fun ShowFloatingWindow(modifier: Modifier = Modifier) {
     }
 
     Column(modifier) {
+        Text(stringResource(
+            id = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
+                R.string.permissions_manage_overlay_new
+            else R.string.permissions_manage_overlay_old
+        ))
+
         Button(onClick = {
             if (Settings.canDrawOverlays(context)) {
                 val window = FloatingWindow(context)

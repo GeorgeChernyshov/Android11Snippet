@@ -44,6 +44,13 @@ fun LocationScreen(
         topBar = { AppBar(name = stringResource(id = Screen.Location.resourceId)) },
         content = {
             Column(modifier = Modifier.padding(16.dp)) {
+                Text("Maybe make this screen work for Android below 10")
+                Text(stringResource(
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
+                        R.string.location_simultaneous_request_new
+                    else R.string.location_simultaneous_request_old
+                ))
+
                 PermissionStatusBlock(
                     foregroundLocationPermitted = viewModel.state.value.foregroundLocationPermitted,
                     backgroundLocationPermitted = viewModel.state.value.backgroundLocationPermitted
@@ -158,6 +165,12 @@ fun SeparatePermissionRequestBlock(
 
     Column(modifier) {
         Text(text = stringResource(id = R.string.location_separate_request_hint))
+
+        Text(stringResource(
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
+                R.string.location_background_new
+            else R.string.location_background_old
+        ))
 
         Button(onClick = {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {

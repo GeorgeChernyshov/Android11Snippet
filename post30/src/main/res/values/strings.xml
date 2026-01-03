@@ -11,7 +11,13 @@
     <!-- common buttons -->
     <string name="button_go_next">Go Next</string>
 
+    <!-- conversations -->
+    <string name="conversations_new">Start a conversation to see cool new bubble notifications!</string>
+    <string name="conversations_old">Start a conversation and you will see a chat notification</string>
+
     <!-- location -->
+    <string name="location_background_new">Background location permission request should redirect you to app settings</string>
+    <string name="location_background_old">Background location permission is requested via a regular request dialog</string>
     <string name="location_background_permitted">Background location permission granted</string>
     <string name="location_background_restricted">Background location permission denied</string>
     <string name="location_foreground_permitted">Foreground location permission granted</string>
@@ -19,6 +25,8 @@
     <string name="location_request">Request location</string>
     <string name="location_separate_request_hint">Try requesting background and foreground location separately</string>
     <string name="location_simultaneous_request_hint">Try requesting background and foreground location simultaneously</string>
+    <string name="location_simultaneous_request_new">Android 11 restricts simultaneous requests to foreground and background location</string>
+    <string name="location_simultaneous_request_old">You can freely request foreground and background location simultaneously. \"Allow all the time\" option enables both, while \"Only while using the app\" option enables only foreground access</string>
 
     <!-- network -->
     <string name="network_bandwidth_downstream">Downstream bandwidth</string>
@@ -45,14 +53,20 @@
 
     <!-- permissions -->
     <string name="permissions_check_phone_number">Check phone number</string>
-    <string name="permissions_one_time_hint">Try requesting one-time permission</string>
+    <string name="permissions_manage_overlay_new">Android 11 makes permission handling more intentional, so you will not be redirected to app-specific permissions screen. You will be redirected to app settings instead</string>
+    <string name="permissions_manage_overlay_old">You should be redirected to app-specific permissions screen</string>
+    <string name="permissions_one_time_hint_new">Android 11 introduced one-time permission. Try requesting it and you\'ll see the \"Only this time\" option</string>
+    <string name="permissions_one_time_hint_old">Try requesting a permission and you should only see \"Allow\" and \"Deny\" options</string>
     <string name="permissions_read_phone_number_hint">READ_PHONE_NUMBER permission should be requested</string>
     <string name="permissions_read_phone_state_hint">READ_PHONE_STATE permission should be requested</string>
-    <string name="permissions_request_multiple_times_hint">Try requesting the permission multiple times</string>
+    <string name="permissions_request_multiple_times_hint">Try requesting the permission and denying it multiple times</string>
+    <string name="permissions_request_multiple_times_new">Starting with Android 11 you should stop seeing the request dialog eventually since \"Don\'t ask again\" is implied on deny</string>
+    <string name="permissions_request_multiple_times_old">You should see the request dialog every time</string>
     <string name="permissions_request_test">Request permission</string>
     <string name="permissions_show_floating_window">Show floating window</string>
 
     <!-- storage -->
+    <string name="storage_favorite_available">Android 11 introduced batch operations on media files. Try adding media to favorites as an example</string>
     <string name="storage_favorite_unavailable">Favorites are unavailable until Android 11</string>
     <string name="storage_open_document_new_hint">Android/data and Android/obb directories should be unavailable</string>
     <string name="storage_open_document_old_hint">Try opening Android/data or Android/obb directory</string>
