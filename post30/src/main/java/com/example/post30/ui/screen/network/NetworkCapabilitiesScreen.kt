@@ -1,22 +1,21 @@
 package com.example.post30.ui.screen.network
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
-import android.net.Network
 import android.net.NetworkCapabilities
-import android.net.NetworkCapabilities.NET_CAPABILITY_NOT_METERED
-import android.net.NetworkCapabilities.NET_CAPABILITY_TEMPORARILY_NOT_METERED
+import android.net.NetworkRequest
+import android.net.wifi.ScanResult
+import android.net.wifi.WifiInfo
+import android.net.wifi.WifiManager
 import android.os.Build
 import android.telephony.PhoneStateListener
-import android.telephony.TelephonyDisplayInfo
-import android.telephony.TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_LTE_ADVANCED_PRO
-import android.telephony.TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NR_NSA
-import android.telephony.TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NR_NSA_MMWAVE
 import android.telephony.TelephonyManager
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -26,7 +25,9 @@ import androidx.compose.material.Button
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -44,35 +45,49 @@ fun NetworkCapabilitiesScreen(
     onNextClicked: () -> Unit
 ) {
     val context = LocalContext.current
-    val connectivityManager = context.getSystemService(
-        Context.CONNECTIVITY_SERVICE
-    ) as ConnectivityManager
+    val connectivityManager = remember {
+        context.getSystemService(
+            Context.CONNECTIVITY_SERVICE
+        ) as ConnectivityManager
+    }
 
-    connectivityManager.registerDefaultNetworkCallback(object : ConnectivityManager.NetworkCallback() {
-        override fun onCapabilitiesChanged(
-            network: Network,
-            networkCapabilities: NetworkCapabilities
-        ) {
-            super.onCapabilitiesChanged(network, networkCapabilities)
+    val telephonyManager = remember {
+        context.getSystemService(
+            Context.TELEPHONY_SERVICE
+        ) as TelephonyManager
+    }
 
-            val meteredness = when {
-                networkCapabilities.hasCapability(NET_CAPABILITY_NOT_METERED) -> NetworkScreenState.Meteredness.UNMETERED
+    val wifiManager = remember {
+        context.getSystemService(
+            Context.WIFI_SERVICE
+        ) as WifiManager
+    }
 
-                (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R &&
-                        networkCapabilities.hasCapability(NET_CAPABILITY_TEMPORARILY_NOT_METERED)) -> {
-                    NetworkScreenState.Meteredness.TEMPORARILY_UNMETERED
-                }
+    val networkCallback = remember {
+        NetworkCallback(
+            setMeteredness = viewModel::setMeteredness,
+            setBandwidth = viewModel::setBandwidth
+        )
+    }
 
-                else -> NetworkScreenState.Meteredness.METERED
-            }
+    val phoneStateListener = remember {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
+            NetworkInfoPhoneStateListener(viewModel::setCellularConnectionStatus)
+        else null
+    }
 
-            viewModel.setMeteredness(meteredness)
-            viewModel.setBandwidth(
-                networkCapabilities.linkDownstreamBandwidthKbps,
-                networkCapabilities.linkUpstreamBandwidthKbps
-            )
+    DisposableEffect(Unit) {
+        val networkRequest = NetworkRequest.Builder()
+            .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
+            .addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)
+            .build()
+
+        connectivityManager.registerNetworkCallback(networkRequest, networkCallback)
+
+        onDispose {
+            connectivityManager.unregisterNetworkCallback(networkCallback)
         }
-    })
+    }
 
     val state = viewModel.state.collectAsState()
 
@@ -84,8 +99,19 @@ fun NetworkCapabilitiesScreen(
 
                 FiveGStatusBlock(
                     modifier = Modifier.padding(top = 16.dp),
-                    fiveGStatus = state.value.fiveGStatus
-                ) { viewModel.setFiveGStatus(it) }
+                    connectionStatus = state.value.connectionStatus,
+                    listenForNetworkType = {
+                        listenForNetworkType(
+                            connectivityManager = connectivityManager,
+                            wifiManager = wifiManager,
+                            telephonyManager = telephonyManager,
+                            phoneStateListener = phoneStateListener,
+                            setConnectionType = viewModel::setConnectionType,
+                            setWiFiConnectionStatus = viewModel::setWiFiConnectionStatus,
+                            setCellularConnectionStatus = viewModel::setCellularConnectionStatus
+                        )
+                    }
+                )
 
                 BandwidthEstimationBlock(
                     modifier = Modifier.padding(top = 16.dp),
@@ -95,7 +121,7 @@ fun NetworkCapabilitiesScreen(
 
                 Button(
                     modifier = Modifier.padding(top = 16.dp),
-                    onClick = { onNextClicked.invoke() }
+                    onClick = onNextClicked
                 ) {
                     Text(text = stringResource(id = R.string.button_go_next))
                 }
@@ -129,22 +155,14 @@ fun CheckMeterednessBlock(
 @Composable
 fun FiveGStatusBlock(
     modifier: Modifier = Modifier,
-    fiveGStatus: Int?,
-    setFiveGStatus: (Int?) -> Unit = {}
+    connectionStatus: ConnectionStatus?,
+    listenForNetworkType: () -> Unit = {}
 ) {
     val context = LocalContext.current
     val requestPermissionLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted ->
-        if (isGranted) listenForNetworkType(context, setFiveGStatus)
-    }
-
-    val stringRes = when (fiveGStatus) {
-        OVERRIDE_NETWORK_TYPE_LTE_ADVANCED_PRO -> R.string.network_five_g_lte_advanced_pro
-        OVERRIDE_NETWORK_TYPE_NR_NSA -> R.string.network_five_g_nr_nsa
-        OVERRIDE_NETWORK_TYPE_NR_NSA_MMWAVE -> R.string.network_five_g_nr_nsa_mmwave
-        null -> R.string.network_five_g_not_checked
-        else -> R.string.network_five_g_not
+        if (isGranted) listenForNetworkType()
     }
 
     Column(modifier = modifier) {
@@ -154,13 +172,15 @@ fun FiveGStatusBlock(
                     Manifest.permission.READ_PHONE_STATE
                 ) == PackageManager.PERMISSION_GRANTED
             ) {
-                listenForNetworkType(context, setFiveGStatus)
+                listenForNetworkType()
             } else requestPermissionLauncher.launch(Manifest.permission.READ_PHONE_STATE)
         }) {
             Text(text = stringResource(id = R.string.network_five_g_check))
         }
 
-        Text(text = stringResource(id = stringRes))
+        connectionStatus?.let {
+            Text(stringResource(it.stringRes))
+        }
     }
 }
 
@@ -204,7 +224,7 @@ fun CheckMeterednessBlockPreview() {
 @Preview(showBackground = true)
 @Composable
 fun FiveGStatusBlockPreview() {
-    FiveGStatusBlock(fiveGStatus = null)
+    FiveGStatusBlock(connectionStatus = null)
 }
 
 @Preview(showBackground = true)
@@ -216,28 +236,88 @@ fun BandwidthEstimationBlockPreview() {
     )
 }
 
+@SuppressLint("MissingPermission")
 fun listenForNetworkType(
-    context: Context,
-    setFiveGStatus: (Int?) -> Unit = {}
+    connectivityManager: ConnectivityManager,
+    wifiManager: WifiManager,
+    telephonyManager: TelephonyManager,
+    phoneStateListener: PhoneStateListener?,
+    setConnectionType: (ConnectionType) -> Unit,
+    setWiFiConnectionStatus: (ConnectionStatus?) -> Unit,
+    setCellularConnectionStatus: (ConnectionStatus?) -> Unit
 ) {
-    val telephonyManager = context.getSystemService(
-        Context.TELEPHONY_SERVICE
-    ) as TelephonyManager
+    val activeNetwork = connectivityManager.activeNetwork
+    val networkCapabilities = connectivityManager
+        .getNetworkCapabilities(activeNetwork)
 
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-        val phoneStateListener = object : PhoneStateListener() {
-            override fun onDisplayInfoChanged(telephonyDisplayInfo: TelephonyDisplayInfo) {
-                if (ActivityCompat.checkSelfPermission(
-                        context,
-                        Manifest.permission.READ_PHONE_STATE
-                    ) != PackageManager.PERMISSION_GRANTED
-                ) return
-
-                super.onDisplayInfoChanged(telephonyDisplayInfo)
-                setFiveGStatus(telephonyDisplayInfo.overrideNetworkType)
-            }
+    when {
+        networkCapabilities == null -> {
+            setConnectionType(ConnectionType.NO_CONNECTION)
+            setCellularConnectionStatus(ConnectionStatus.NO_CONNECTION)
         }
 
-        telephonyManager.listen(phoneStateListener, PhoneStateListener.LISTEN_DISPLAY_INFO_CHANGED)
-    } else setFiveGStatus(null)
+        networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> {
+            setConnectionType(ConnectionType.WIFI)
+            setWiFiConnectionStatus(
+                getWifiConnectionStatus(networkCapabilities, wifiManager)
+            )
+        }
+
+        networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> {
+            setConnectionType(ConnectionType.CELLULAR)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                listenForCellularNetworkType(
+                    telephonyManager = telephonyManager,
+                    phoneStateListener = phoneStateListener
+                )
+            } else {
+                val connectionStatus = ConnectionStatus.fromCellularNetworkType(
+                    networkType = telephonyManager.networkType,
+                    networkTypeOverride = 0
+                )
+
+                setCellularConnectionStatus(connectionStatus)
+            }
+        }
+    }
+}
+
+@RequiresApi(Build.VERSION_CODES.R)
+fun listenForCellularNetworkType(
+    telephonyManager: TelephonyManager,
+    phoneStateListener: PhoneStateListener?,
+) {
+    telephonyManager.listen(
+        phoneStateListener,
+        PhoneStateListener.LISTEN_DISPLAY_INFO_CHANGED
+    )
+}
+
+fun getWifiConnectionStatus(
+    networkCapabilities: NetworkCapabilities,
+    wifiManager: WifiManager
+): ConnectionStatus {
+    val wifiInfo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
+        networkCapabilities.transportInfo as? WifiInfo
+            ?: wifiManager.connectionInfo
+    else wifiManager.connectionInfo
+
+    return wifiInfo?.let {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            when (it.wifiStandard) {
+                ScanResult.WIFI_STANDARD_11AX -> ConnectionStatus.WIFI_6
+                ScanResult.WIFI_STANDARD_11AC -> ConnectionStatus.WIFI_5
+                ScanResult.WIFI_STANDARD_11N -> ConnectionStatus.WIFI_4
+
+                else -> ConnectionStatus.WIFI_OTHER
+            }
+        } else {
+            when {
+                it.frequency >= 5000 -> ConnectionStatus.WIFI_5
+                it.frequency >= 2400 -> ConnectionStatus.WIFI_4
+
+                else -> ConnectionStatus.WIFI_OTHER
+            }
+        }
+    } ?: ConnectionStatus.WIFI_OTHER
 }

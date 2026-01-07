@@ -1,7 +1,5 @@
 package com.example.post30.ui.screen.network
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,8 +15,22 @@ class NetworkViewModel : ViewModel() {
         _state.emit(_state.value.copy(meteredness = value))
     }
 
-    fun setFiveGStatus(status: Int?) = viewModelScope.launch {
-        _state.emit(_state.value.copy(fiveGStatus = status))
+    fun setConnectionType(
+        connectionType: ConnectionType
+    ) = viewModelScope.launch {
+        _state.emit(_state.value.copy(connectionType = connectionType))
+    }
+
+    fun setWiFiConnectionStatus(
+        status: ConnectionStatus?
+    ) = viewModelScope.launch {
+        _state.emit(_state.value.copy(wifiConnectionStatus = status))
+    }
+
+    fun setCellularConnectionStatus(
+        status: ConnectionStatus?
+    ) = viewModelScope.launch {
+        _state.emit(_state.value.copy(cellularConnectionStatus = status))
     }
 
     fun setBandwidth(

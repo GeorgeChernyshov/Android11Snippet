@@ -29,19 +29,31 @@
     <string name="location_simultaneous_request_old">You can freely request foreground and background location simultaneously. \"Allow all the time\" option enables both, while \"Only while using the app\" option enables only foreground access</string>
 
     <!-- network -->
+    <string name="network_2g">2G</string>
+    <string name="network_3g">3G</string>
+    <string name="network_4g_lte">4G LTE</string>
+    <string name="network_5g">5G NR (SA)</string>
+    <string name="network_5g_lte_advanced_pro">LTE-Advanced Pro (e.g., 5GE)</string>
+    <string name="network_5g_mmwave">5G NR (mmWave)</string>
+    <string name="network_5g_nsa">5G NR (NSA)</string>
     <string name="network_bandwidth_downstream">Downstream bandwidth</string>
     <string name="network_bandwidth_unknown">Unknown</string>
     <string name="network_bandwidth_upstream">Upstream bandwidth</string>
+    <string name="network_cellular_unknown">Cellular (Unknown)</string>
     <string name="network_five_g_check">Check 5G status</string>
-    <string name="network_five_g_lte_advanced_pro">5G type - Advanced pro LTE (5Ge)</string>
-    <string name="network_five_g_not">Not a 5G network</string>
-    <string name="network_five_g_not_checked">5G Check is not available until Android 11</string>
-    <string name="network_five_g_nr_nsa">5G type - NR (5G) for 5G Sub-6 networks</string>
-    <string name="network_five_g_nr_nsa_mmwave">5G type - (5G+/5G UW) for 5G mmWave networks</string>
+    <string name="network_iwlan">Wi-Fi Calling (IWLAN)</string>
     <string name="network_meteredness_metered">Your network is metered</string>
     <string name="network_meteredness_temp_unmetered">Your network is temporarily unmetered</string>
     <string name="network_meteredness_unknown">Your network status is unknown</string>
     <string name="network_meteredness_unmetered">Your network is unmetered</string>
+    <string name="network_no_connection">No Connection</string>
+    <string name="network_unknown">Unknown</string>
+    <string name="network_wifi4">Wi-Fi 4 (802.11n)</string>
+    <string name="network_wifi5">Wi-Fi 5 (802.11ac)</string>
+    <string name="network_wifi6">Wi-Fi 6 (802.11ax)</string>
+    <string name="network_wifi6e">Wi-Fi 6E (6 GHz band)</string>
+    <string name="network_wifi7">Wi-Fi 7 (802.11be)</string>
+    <string name="network_wifi_other">Wi-Fi (Other)</string>
 
     <!-- notifications -->
     <string name="notification_chat_channel_name">Chat Notification Channel</string>
