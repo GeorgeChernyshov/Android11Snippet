@@ -17,6 +17,7 @@ import com.example.post30.ui.screen.conversations.ConversationsActivity
 import com.example.post30.ui.screen.conversations.ConversationsScreen
 import com.example.post30.ui.screen.location.LocationScreen
 import com.example.post30.ui.screen.network.NetworkCapabilitiesScreen
+import com.example.post30.ui.screen.packagevisibility.PackageVisibilityScreen
 import com.example.post30.ui.screen.permissions.PermissionsScreen
 import com.example.post30.ui.screen.storage.StorageScreen
 import com.example.post30.ui.theme.Android11SnippetTheme
@@ -51,8 +52,12 @@ fun App(
                 viewModel.setCurrentScreen(Screen.Network)
             }
 
-            is Screen.Network -> NetworkCapabilitiesScreen {
+            is Screen.PackageVisibility -> PackageVisibilityScreen {
                 context.startActivity(Intent(context, ConversationsActivity::class.java))
+            }
+
+            is Screen.Network -> NetworkCapabilitiesScreen {
+                viewModel.setCurrentScreen(Screen.PackageVisibility)
             }
 
             is Screen.Conversations -> ConversationsScreen()

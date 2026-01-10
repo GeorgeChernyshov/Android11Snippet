@@ -4,9 +4,14 @@ import androidx.annotation.StringRes
 import com.example.post30.R
 
 sealed class Screen(val route: String, @StringRes val resourceId: Int) {
-    object Storage : Screen("storage", R.string.label_storage)
-    object Permissions : Screen("permissions", R.string.label_permissions)
+    object Conversations : Screen("conversations", R.string.label_conversations)
     object Location : Screen("location", R.string.label_location)
     object Network : Screen("network", R.string.label_network)
-    object Conversations : Screen("conversations", R.string.label_conversations)
+    object PackageVisibility : Screen(
+        "packageVisibility",
+        R.string.label_package_visibility
+    )
+
+    object Permissions : Screen("permissions", R.string.label_permissions)
+    object Storage : Screen("storage", R.string.label_storage)
 }

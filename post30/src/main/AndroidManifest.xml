@@ -45,4 +45,15 @@
 
     </application>
 
+    <queries>
+
+        <package android:name="com.example.post29" />
+
+        <intent>
+            <action android:name="android.intent.action.SEND" />
+            <data android:mimeType="image/jpeg" />
+        </intent>
+
+    </queries>
+
 </manifest>

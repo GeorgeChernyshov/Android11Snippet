@@ -5,6 +5,7 @@
     <string name="label_conversations">Conversations</string>
     <string name="label_location">Location</string>
     <string name="label_network">5G Capabilities</string>
+    <string name="label_package_visibility">Package visibility</string>
     <string name="label_permissions">Permissions</string>
     <string name="label_storage">Storage</string>
 
@@ -62,6 +63,10 @@
     <string name="notification_send">Send notification</string>
     <string name="notification_title">My Notification</string>
     <string name="notification_text">Notification text</string>
+
+    <!-- package visibility -->
+    <string name="package_visibility_hint">If an app targets Android 11+, you can query preinstalled system apps but that\'s about it. You can add apps to the filter, but that has to be explicit. If you press the button, you will see system apps and several other apps defined in AndroidManifest \"queries\" section</string>
+    <string name="package_visibility_query_all">Query all packages on the device</string>
 
     <!-- permissions -->
     <string name="permissions_check_phone_number">Check phone number</string>
