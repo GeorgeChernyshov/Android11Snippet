@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">pre30</string>
+    <string name="app_name">Android11Snippet-pre30</string>
+
+    <!-- fragment labels -->
+    <string name="package_visibility_label">Package Visibility</string>
+
+    <!-- package visibility -->
+    <string name="package_visibility_hint">If an app targets Android 10 or below, it allows you to easily access all packages on the device.</string>
+    <string name="package_visibility_query_all">Query all packages on the device</string>
 </resources>
