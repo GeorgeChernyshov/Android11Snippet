@@ -2,15 +2,22 @@
     <string name="app_name">Android11Snippet-post30</string>
 
     <!-- screen labels -->
+    <string name="label_audit">Data Access Audit</string>
     <string name="label_conversations">Conversations</string>
     <string name="label_location">Location</string>
     <string name="label_network">5G Capabilities</string>
-    <string name="label_package_visibility">Package visibility</string>
+    <string name="label_package_visibility">Package Visibility</string>
     <string name="label_permissions">Permissions</string>
     <string name="label_storage">Storage</string>
 
     <!-- common buttons -->
     <string name="button_go_next">Go Next</string>
+
+    <!-- audit -->
+    <string name="audit_hint">Android 11 introduces data access auditing which can monitor access to all private data</string>
+    <string name="audit_log_hint">Here, the log of all private data operations is displayed</string>
+    <string name="audit_request_location">Request Location</string>
+    <string name="audit_request_location_hint">As an example of private data access, try requesting user location</string>
 
     <!-- conversations -->
     <string name="conversations_new">Start a conversation to see cool new bubble notifications!</string>

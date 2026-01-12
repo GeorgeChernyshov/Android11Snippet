@@ -12,7 +12,15 @@ class AppViewModel : ViewModel() {
     val currentScreen: State<Screen>
         get() = _currentScreen
 
+    private val _appOps: MutableState<List<String>> = mutableStateOf(emptyList())
+    val appOps: State<List<String>>
+        get() = _appOps
+
     fun setCurrentScreen(screen: Screen) {
         _currentScreen.value = screen
+    }
+
+    fun addAppOp(op: String) {
+        _appOps.value += op
     }
 }

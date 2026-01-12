@@ -51,19 +51,16 @@ fun PermissionsScreen(
                     modifier = Modifier.padding(top = 16.dp),
                     phoneNumber = viewModel.state.value.line1Number,
                     onClick = {
+                        val permission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
+                            Manifest.permission.READ_PHONE_NUMBERS
+                        else Manifest.permission.READ_PHONE_STATE
+
                         if (ActivityCompat.checkSelfPermission(
                                 context,
-                                Manifest.permission.READ_PHONE_NUMBERS
-                            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                                context,
-                                Manifest.permission.READ_PHONE_STATE
+                                permission
                             ) != PackageManager.PERMISSION_GRANTED
                         ) {
-                            requestPermissionLauncher.launch(
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
-                                    Manifest.permission.READ_PHONE_NUMBERS
-                                else Manifest.permission.READ_PHONE_STATE
-                            )
+                            requestPermissionLauncher.launch(permission)
                         } else {
                             viewModel.getPhoneNumber(telephonyManager.line1Number)
                         }

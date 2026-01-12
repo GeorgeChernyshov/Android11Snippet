@@ -4,6 +4,7 @@ import androidx.annotation.StringRes
 import com.example.post30.R
 
 sealed class Screen(val route: String, @StringRes val resourceId: Int) {
+    object Audit : Screen("audit", R.string.label_audit)
     object Conversations : Screen("conversations", R.string.label_conversations)
     object Location : Screen("location", R.string.label_location)
     object Network : Screen("network", R.string.label_network)
