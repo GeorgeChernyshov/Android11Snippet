@@ -7,6 +7,7 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Button
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -43,41 +44,65 @@ fun LocationScreen(
     Scaffold(
         topBar = { AppBar(name = stringResource(id = Screen.Location.resourceId)) },
         content = {
-            Column(modifier = Modifier.padding(16.dp)) {
-                Text("Maybe make this screen work for Android below 10")
-                Text(stringResource(
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
-                        R.string.location_simultaneous_request_new
-                    else R.string.location_simultaneous_request_old
-                ))
+            LazyColumn(modifier = Modifier.padding(16.dp)) {
+                item {
+                    Text("Maybe make this screen work for Android below 10")
+                }
 
-                PermissionStatusBlock(
-                    foregroundLocationPermitted = viewModel.state.value.foregroundLocationPermitted,
-                    backgroundLocationPermitted = viewModel.state.value.backgroundLocationPermitted
-                )
+                item {
+                    Text(stringResource(
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
+                            R.string.location_simultaneous_request_new
+                        else R.string.location_simultaneous_request_old
+                    ))
+                }
 
-                SimultaneousPermissionRequestBlock(
-                    modifier = Modifier.padding(top = 16.dp),
-                    onPermissionRequestResult = { foreground, background ->
-                        viewModel.updatePermissions(foreground, background)
+                item {
+                    PermissionStatusBlock(
+                        foregroundLocationPermitted = viewModel.state.value.foregroundLocationPermitted,
+                        backgroundLocationPermitted = viewModel.state.value.backgroundLocationPermitted
+                    )
+
+                }
+
+                item {
+                    SimultaneousPermissionRequestBlock(
+                        modifier = Modifier.padding(top = 16.dp),
+                        onPermissionRequestResult = { foreground, background ->
+                            viewModel.updatePermissions(foreground, background)
+                        }
+                    )
+                }
+
+                item {
+                    SeparatePermissionRequestBlock(
+                        modifier = Modifier.padding(top = 16.dp),
+                        onForegroundPermissionResult = {
+                            viewModel.updatePermissions(foregroundLocationPermitted = it)
+                        },
+                        onBackgroundPermissionResult = {
+                            viewModel.updatePermissions(backgroundLocationPermitted = it)
+                        }
+                    )
+                }
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    item {
+                        Text(stringResource(id = R.string.location_foreground_hint_1))
                     }
-                )
 
-                SeparatePermissionRequestBlock(
-                    modifier = Modifier.padding(top = 16.dp),
-                    onForegroundPermissionResult = {
-                        viewModel.updatePermissions(foregroundLocationPermitted = it)
-                    },
-                    onBackgroundPermissionResult = {
-                        viewModel.updatePermissions(backgroundLocationPermitted = it)
+                    item {
+                        Text(stringResource(id = R.string.location_foreground_hint_2))
                     }
-                )
+                }
 
-                Button(
-                    modifier = Modifier.padding(top = 16.dp),
-                    onClick = { onNextClicked.invoke() }
-                ) {
-                    Text(text = stringResource(id = R.string.button_go_next))
+                item {
+                    Button(
+                        modifier = Modifier.padding(top = 16.dp),
+                        onClick = { onNextClicked.invoke() }
+                    ) {
+                        Text(text = stringResource(id = R.string.button_go_next))
+                    }
                 }
             }
         }

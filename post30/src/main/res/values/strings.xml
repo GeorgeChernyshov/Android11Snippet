@@ -28,6 +28,8 @@
     <string name="location_background_old">Background location permission is requested via a regular request dialog</string>
     <string name="location_background_permitted">Background location permission granted</string>
     <string name="location_background_restricted">Background location permission denied</string>
+    <string name="location_foreground_hint_1">If your app targets Android 11 or higher and accesses the camera or microphone in a foreground service, you must include the camera and microphone foreground service types.</string>
+    <string name="location_foreground_hint_2">If your app starts a foreground service while running in the background, the foreground service cannot access the microphone or camera. Additionally, the service cannot access location unless your app has background location access.</string>
     <string name="location_foreground_permitted">Foreground location permission granted</string>
     <string name="location_foreground_restricted">Foreground location permission denied</string>
     <string name="location_request">Request location</string>
