@@ -13,6 +13,7 @@ import android.net.wifi.WifiManager
 import android.os.Build
 import android.telephony.PhoneStateListener
 import android.telephony.TelephonyManager
+import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
@@ -29,8 +30,10 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.isEmpty
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
@@ -38,6 +41,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.post30.R
 import com.example.post30.ui.components.AppBar
 import com.example.post30.ui.navigation.Screen
+import java.net.NetworkInterface
+import java.net.SocketException
+import kotlin.text.append
+import kotlin.text.format
+import kotlin.text.indices
 
 @Composable
 fun NetworkCapabilitiesScreen(
@@ -95,6 +103,7 @@ fun NetworkCapabilitiesScreen(
         topBar = { AppBar(name = stringResource(id = Screen.Network.resourceId)) },
         content = {
             Column(modifier = Modifier.padding(16.dp)) {
+//                MacAddressBlock()
                 CheckMeterednessBlock(meteredness = state.value.meteredness)
 
                 FiveGStatusBlock(
@@ -128,6 +137,11 @@ fun NetworkCapabilitiesScreen(
             }
         }
     )
+}
+
+@Composable
+fun MacAddressBlock() {
+    Text(getMacAddressInformation())
 }
 
 @Composable
@@ -213,6 +227,12 @@ fun BandwidthEstimationBlock(
             )
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun MacAddressBlockPreview() {
+    MacAddressBlock()
 }
 
 @Preview(showBackground = true)
@@ -320,4 +340,39 @@ fun getWifiConnectionStatus(
             }
         }
     } ?: ConnectionStatus.WIFI_OTHER
+}
+
+// TODO finish this once I get an actual device
+fun getMacAddressInformation(): String {
+    val stringBuilder = StringBuilder()
+
+    try {
+        val interfaces = NetworkInterface.getNetworkInterfaces()
+        while (interfaces.hasMoreElements()) {
+            val intf: NetworkInterface = interfaces.nextElement()
+
+            if (intf.isLoopback || !intf.isUp) {
+                // Ignore loopback and down interfaces
+                continue
+            }
+
+            val mac = intf.hardwareAddress
+            if (mac == null || mac.isEmpty()) {
+                stringBuilder.appendLine("${intf.displayName}, ${intf.name}")
+                continue
+            }
+
+            val buf = StringBuilder()
+            for (i in mac.indices) {
+                buf.append(String.format("%02X%s", mac[i], if (i < mac.size - 1) ":" else ""))
+            }
+            stringBuilder.append(
+                stringBuilder.appendLine("${intf.displayName}, ${intf.name}, $buf")
+            )
+        }
+    } catch (ex: SocketException) {
+        Log.e("NetworkCapabilitiesScreen", ex.toString())
+    }
+
+    return stringBuilder.toString()
 }

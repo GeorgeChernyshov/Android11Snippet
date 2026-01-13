@@ -50,6 +50,7 @@
     <string name="network_cellular_unknown">Cellular (Unknown)</string>
     <string name="network_five_g_check">Check 5G status</string>
     <string name="network_iwlan">Wi-Fi Calling (IWLAN)</string>
+    <string name="network_mac_android11">MAC address is randomized and </string>
     <string name="network_meteredness_metered">Your network is metered</string>
     <string name="network_meteredness_temp_unmetered">Your network is temporarily unmetered</string>
     <string name="network_meteredness_unknown">Your network status is unknown</string>
