@@ -59,4 +59,7 @@ dependencies {
 
     //viewmodel
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07'
+
+    // media
+    implementation "androidx.media:media:1.4.1"
 }

@@ -21,6 +21,7 @@ import com.example.post30.ui.screen.audit.AuditScreen
 import com.example.post30.ui.screen.conversations.ConversationsActivity
 import com.example.post30.ui.screen.conversations.ConversationsScreen
 import com.example.post30.ui.screen.location.LocationScreen
+import com.example.post30.ui.screen.media.MediaScreen
 import com.example.post30.ui.screen.network.NetworkCapabilitiesScreen
 import com.example.post30.ui.screen.packagevisibility.PackageVisibilityScreen
 import com.example.post30.ui.screen.permissions.PermissionsScreen
@@ -88,9 +89,7 @@ fun App(viewModel: AppViewModel) {
             is Screen.Audit -> AuditScreen(
                 appOps = viewModel.appOps.value,
                 onNextClick = {
-                    context.startActivity(
-                        Intent(context, ConversationsActivity::class.java)
-                    )
+                    viewModel.setCurrentScreen(Screen.Media)
                 }
             )
 
@@ -100,12 +99,16 @@ fun App(viewModel: AppViewModel) {
                 viewModel.setCurrentScreen(Screen.Network)
             }
 
+            is Screen.Media -> MediaScreen {
+                context.startActivity(
+                    Intent(context, ConversationsActivity::class.java)
+                )
+            }
+
             is Screen.Network -> NetworkCapabilitiesScreen {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
                     viewModel.setCurrentScreen(Screen.PackageVisibility)
-                else context.startActivity(
-                    Intent(context, ConversationsActivity::class.java)
-                )
+                else viewModel.setCurrentScreen(Screen.Media)
             }
 
             is Screen.PackageVisibility -> PackageVisibilityScreen {

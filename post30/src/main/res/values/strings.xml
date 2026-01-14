@@ -5,6 +5,7 @@
     <string name="label_audit">Data Access Audit</string>
     <string name="label_conversations">Conversations</string>
     <string name="label_location">Location</string>
+    <string name="label_media">Media Controls</string>
     <string name="label_network">5G Capabilities</string>
     <string name="label_package_visibility">Package Visibility</string>
     <string name="label_permissions">Permissions</string>
@@ -37,6 +38,13 @@
     <string name="location_simultaneous_request_hint">Try requesting background and foreground location simultaneously</string>
     <string name="location_simultaneous_request_new">Android 11 restricts simultaneous requests to foreground and background location</string>
     <string name="location_simultaneous_request_old">You can freely request foreground and background location simultaneously. \"Allow all the time\" option enables both, while \"Only while using the app\" option enables only foreground access</string>
+
+    <!-- media -->
+    <string name="media_default_audio_title">Selected Audio</string>
+    <string name="media_hint_new">Android 11 introduced media controls. Try playing an audio file and check your quick menu to see new, unified media playing experience.</string>
+    <string name="media_hint_old">Try playing an audio file. Media controls do not exist prior to Android 11, so you probably won\'t be able to control the meia playback at all.</string>
+    <string name="media_play_button">Pick and Play Audio</string>
+    <string name="media_stop_button">Stop Playback</string>
 
     <!-- network -->
     <string name="network_2g">2G</string>
