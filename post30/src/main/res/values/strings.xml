@@ -9,6 +9,7 @@
     <string name="label_network">5G Capabilities</string>
     <string name="label_package_visibility">Package Visibility</string>
     <string name="label_permissions">Permissions</string>
+    <string name="label_security">Security</string>
     <string name="label_storage">Storage</string>
 
     <!-- common buttons -->
@@ -110,4 +111,17 @@
     <string name="storage_open_document_tree_old_hint">Try opening Download directory</string>
     <string name="storage_open_document_tree_test">Test OPEN_DOCUMENT_TREE</string>
     <string name="storage_select_favorite_media">Add media to favorite</string>
+    <string name="security_authentication_error">Authentication error: %1$s (%2$d)</string>
+    <string name="security_auth_type_biometric">BIOMETRIC (strong or weak)</string>
+    <string name="security_auth_type_device_credential">DEVICE_CREDENTIAL (PIN/Pattern/Password)</string>
+    <string name="security_auth_type_unknown">UNKNOWN</string>
+    <string name="security_authentication_succeeded">Authentication succeeded! Type: %1$s</string>
+    <string name="security_authentication_failed">Authentication failed.</string>
+    <string name="security_prompt_weak_title">Unlock with your biometrics (Weak)</string>
+    <string name="security_prompt_weak_subtitle">Use any biometrics enrolled on your device.</string>
+    <string name="security_prompt_cancel">Cancel</string>
+    <string name="security_prompt_device_title">App Lock (Device Credential Only)</string>
+    <string name="security_prompt_device_subtitle">Use your device PIN, Pattern, or Password.</string>
+    <string name="security_prompt_strong_title">Secure Payment (Strong Biometric Only)</string>
+    <string name="security_prompt_strong_subtitle">Authenticate using strong biometrics (fingerprint/face).</string>
 </resources>

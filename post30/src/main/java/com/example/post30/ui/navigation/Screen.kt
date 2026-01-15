@@ -15,5 +15,6 @@ sealed class Screen(val route: String, @StringRes val resourceId: Int) {
     )
 
     object Permissions : Screen("permissions", R.string.label_permissions)
+    object Security : Screen("security", R.string.label_security)
     object Storage : Screen("storage", R.string.label_storage)
 }

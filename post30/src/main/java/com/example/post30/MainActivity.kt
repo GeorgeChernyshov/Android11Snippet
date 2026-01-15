@@ -127,6 +127,8 @@ fun App(viewModel: AppViewModel) {
                 )
             }
 
+            is Screen.Security -> {}
+
             is Screen.Storage -> StorageScreen {
                 viewModel.setCurrentScreen(Screen.Permissions)
             }
