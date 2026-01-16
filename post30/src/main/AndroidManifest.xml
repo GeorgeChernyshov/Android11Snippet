@@ -40,14 +40,14 @@
             android:exported="true"
             android:resizeableActivity="true" />
 
-        <activity android:name=".ui.screen.conversations.ConversationsActivity"
+        <activity android:name=".ui.screen.newfeatures.conversations.ConversationsActivity"
             android:exported="true" />
 
-        <activity android:name="com.example.post30.ui.screen.security.SecurityActivity"
+        <activity android:name="com.example.post30.ui.screen.newfeatures.security.SecurityActivity"
             android:exported="false"/>
 
         <receiver
-            android:name="com.example.post30.ui.screen.conversations.ReplyReceiver" />
+            android:name="com.example.post30.ui.screen.newfeatures.conversations.ReplyReceiver" />
 
     </application>
 

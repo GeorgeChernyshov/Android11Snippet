@@ -6,7 +6,7 @@ import android.app.NotificationChannelGroup
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
-import com.example.post30.ui.screen.conversations.DIUtils
+import com.example.post30.ui.screen.newfeatures.conversations.DIUtils
 
 class Post30Application : Application() {
 

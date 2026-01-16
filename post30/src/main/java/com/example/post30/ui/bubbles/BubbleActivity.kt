@@ -1,6 +1,5 @@
 package com.example.post30.ui.bubbles
 
-import android.app.PendingIntent
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -10,14 +9,11 @@ import android.graphics.Path
 import android.graphics.PixelFormat
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffXfermode
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Message
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -29,7 +25,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.icons.Icons
@@ -46,8 +41,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.post30.R
-import com.example.post30.ui.screen.conversations.ConversationsActivity
-import com.example.post30.ui.screen.conversations.ReplyReceiver
+import com.example.post30.ui.screen.newfeatures.conversations.ConversationsActivity
+import com.example.post30.ui.screen.newfeatures.conversations.ReplyReceiver
 import com.example.post30.ui.theme.Android11SnippetTheme
 
 class BubbleActivity : ComponentActivity() {

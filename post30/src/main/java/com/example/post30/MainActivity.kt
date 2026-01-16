@@ -17,15 +17,18 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.post30.ui.AppViewModel
 import com.example.post30.ui.navigation.Screen
-import com.example.post30.ui.screen.audit.AuditScreen
-import com.example.post30.ui.screen.conversations.ConversationsActivity
-import com.example.post30.ui.screen.conversations.ConversationsScreen
-import com.example.post30.ui.screen.location.LocationScreen
-import com.example.post30.ui.screen.media.MediaScreen
-import com.example.post30.ui.screen.network.NetworkCapabilitiesScreen
-import com.example.post30.ui.screen.packagevisibility.PackageVisibilityScreen
-import com.example.post30.ui.screen.permissions.PermissionsScreen
-import com.example.post30.ui.screen.storage.StorageScreen
+import com.example.post30.ui.screen.MainScreen
+import com.example.post30.ui.screen.privacy.audit.AuditScreen
+import com.example.post30.ui.screen.newfeatures.conversations.ConversationsActivity
+import com.example.post30.ui.screen.newfeatures.conversations.ConversationsScreen
+import com.example.post30.ui.screen.privacy.location.LocationScreen
+import com.example.post30.ui.screen.newfeatures.media.MediaScreen
+import com.example.post30.ui.screen.newfeatures.network.NetworkCapabilitiesScreen
+import com.example.post30.ui.screen.newfeatures.NewFeaturesScreen
+import com.example.post30.ui.screen.privacy.packagevisibility.PackageVisibilityScreen
+import com.example.post30.ui.screen.privacy.permissions.PermissionsScreen
+import com.example.post30.ui.screen.privacy.PrivacyScreen
+import com.example.post30.ui.screen.privacy.storage.StorageScreen
 import com.example.post30.ui.theme.Android11SnippetTheme
 
 class MainActivity : ComponentActivity() {
@@ -76,6 +79,11 @@ class MainActivity : ComponentActivity() {
         setContent { App(viewModel) }
     }
 
+    override fun onBackPressed() {
+        if (!viewModel.navigateBack())
+            finish()
+    }
+
     companion object {
         const val APP_OP_TAG = "AppOpCallback"
     }
@@ -86,52 +94,27 @@ fun App(viewModel: AppViewModel) {
     Android11SnippetTheme {
         val context = LocalContext.current
         when (viewModel.currentScreen.value) {
-            is Screen.Audit -> AuditScreen(
-                appOps = viewModel.appOps.value,
-                onNextClick = {
-                    viewModel.setCurrentScreen(Screen.Media)
-                }
+            is Screen.Audit -> AuditScreen(viewModel.appOps.value)
+            is Screen.Conversations -> ConversationsScreen()
+            is Screen.Location -> LocationScreen()
+            is Screen.Main -> MainScreen(
+                onScreenSelected = viewModel::navigateTo
             )
 
-            is Screen.Conversations -> ConversationsScreen()
+            is Screen.Media -> MediaScreen()
+            is Screen.Network -> NetworkCapabilitiesScreen()
+            is Screen.NewFeatures -> NewFeaturesScreen(
+                onScreenSelected = viewModel::navigateTo
+            )
 
-            is Screen.Location -> LocationScreen {
-                viewModel.setCurrentScreen(Screen.Network)
-            }
-
-            is Screen.Media -> MediaScreen {
-                context.startActivity(
-                    Intent(context, ConversationsActivity::class.java)
-                )
-            }
-
-            is Screen.Network -> NetworkCapabilitiesScreen {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
-                    viewModel.setCurrentScreen(Screen.PackageVisibility)
-                else viewModel.setCurrentScreen(Screen.Media)
-            }
-
-            is Screen.PackageVisibility -> PackageVisibilityScreen {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
-                    viewModel.setCurrentScreen(Screen.Audit)
-                else context.startActivity(
-                    Intent(context, ConversationsActivity::class.java)
-                )
-            }
-
-            is Screen.Permissions -> PermissionsScreen {
-                viewModel.setCurrentScreen(
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
-                        Screen.Location
-                    else Screen.Network
-                )
-            }
+            is Screen.PackageVisibility -> PackageVisibilityScreen()
+            is Screen.Permissions -> PermissionsScreen()
+            is Screen.Privacy -> PrivacyScreen(
+                onScreenSelected = viewModel::navigateTo
+            )
 
             is Screen.Security -> {}
-
-            is Screen.Storage -> StorageScreen {
-                viewModel.setCurrentScreen(Screen.Permissions)
-            }
+            is Screen.Storage -> StorageScreen()
         }
     }
 }

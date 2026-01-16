@@ -5,10 +5,13 @@
     <string name="label_audit">Data Access Audit</string>
     <string name="label_conversations">Conversations</string>
     <string name="label_location">Location</string>
+    <string name="label_main">Android 11 Snippet</string>
     <string name="label_media">Media Controls</string>
     <string name="label_network">5G Capabilities</string>
+    <string name="label_new_features">New Features and APIs</string>
     <string name="label_package_visibility">Package Visibility</string>
     <string name="label_permissions">Permissions</string>
+    <string name="label_privacy">Privacy</string>
     <string name="label_security">Security</string>
     <string name="label_storage">Storage</string>
 
