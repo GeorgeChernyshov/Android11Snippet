@@ -10,6 +10,7 @@
     <string name="label_network">5G Capabilities</string>
     <string name="label_new_features">New Features and APIs</string>
     <string name="label_package_visibility">Package Visibility</string>
+    <string name="label_performance">Performance and Quality</string>
     <string name="label_permissions">Permissions</string>
     <string name="label_privacy">Privacy</string>
     <string name="label_security">Security</string>
@@ -89,6 +90,12 @@
     <!-- package visibility -->
     <string name="package_visibility_hint">If an app targets Android 11+, you can query preinstalled system apps but that\'s about it. You can add apps to the filter, but that has to be explicit. If you press the button, you will see system apps and several other apps defined in AndroidManifest \"queries\" section</string>
     <string name="package_visibility_query_all">Query all packages on the device</string>
+
+    <!-- performance -->
+    <string name="performance_adb_incremental">Android 11 supports incremental APK installation via ADB. It is when you are installing enough of the APK to launch the app while streaming the remaining data in the background.</string>
+    <string name="performance_adb_incremental_2">Before running an ADB incremental APK install, you must sign your APK and create an APK Signature Scheme v4 file. The v4 signature file must be placed next to the APK for this feature to work.</string>
+    <string name="performance_hint_neural">Android 11 expands and improves the Neural Networks API (NNAPI).</string>
+    <string name="performance_wireless_debugging">Android 11 supports wireless debugging via ADB</string>
 
     <!-- permissions -->
     <string name="permissions_check_phone_number">Check phone number</string>

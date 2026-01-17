@@ -16,6 +16,7 @@ sealed class Screen(val route: String, @StringRes val resourceId: Int) {
         R.string.label_package_visibility
     )
 
+    object Performance : Screen("performance", R.string.label_performance)
     object Permissions : Screen("permissions", R.string.label_permissions)
     object Privacy : Screen("privacy", R.string.label_privacy)
     object Security : Screen("security", R.string.label_security)

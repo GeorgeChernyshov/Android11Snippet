@@ -60,6 +60,12 @@ fun NewFeaturesScreen(onScreenSelected: (Screen) -> Unit) {
                 ) {
                     Text(stringResource(R.string.label_security))
                 }
+
+                Button(onClick = {
+                    onScreenSelected(Screen.Performance)
+                }) {
+                    Text(stringResource(R.string.label_performance))
+                }
             }
         }
     )

@@ -25,6 +25,7 @@ import com.example.post30.ui.screen.privacy.location.LocationScreen
 import com.example.post30.ui.screen.newfeatures.media.MediaScreen
 import com.example.post30.ui.screen.newfeatures.network.NetworkCapabilitiesScreen
 import com.example.post30.ui.screen.newfeatures.NewFeaturesScreen
+import com.example.post30.ui.screen.newfeatures.performance.PerformanceScreen
 import com.example.post30.ui.screen.privacy.packagevisibility.PackageVisibilityScreen
 import com.example.post30.ui.screen.privacy.permissions.PermissionsScreen
 import com.example.post30.ui.screen.privacy.PrivacyScreen
@@ -108,6 +109,7 @@ fun App(viewModel: AppViewModel) {
             )
 
             is Screen.PackageVisibility -> PackageVisibilityScreen()
+            is Screen.Performance -> PerformanceScreen()
             is Screen.Permissions -> PermissionsScreen()
             is Screen.Privacy -> PrivacyScreen(
                 onScreenSelected = viewModel::navigateTo
