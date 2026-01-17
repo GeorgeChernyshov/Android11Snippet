@@ -4,6 +4,7 @@
     <!-- screen labels -->
     <string name="label_audit">Data Access Audit</string>
     <string name="label_conversations">Conversations</string>
+    <string name="label_gwp_asan">GWP-ASan</string>
     <string name="label_location">Location</string>
     <string name="label_main">Android 11 Snippet</string>
     <string name="label_media">Media Controls</string>
@@ -94,6 +95,10 @@
     <!-- performance -->
     <string name="performance_adb_incremental">Android 11 supports incremental APK installation via ADB. It is when you are installing enough of the APK to launch the app while streaming the remaining data in the background.</string>
     <string name="performance_adb_incremental_2">Before running an ADB incremental APK install, you must sign your APK and create an APK Signature Scheme v4 file. The v4 signature file must be placed next to the APK for this feature to work.</string>
+    <string name="performance_gwp_asan_button">Invoke memory error</string>
+    <string name="performance_gwp_asan_hint">GWP-ASan is a native memory allocator feature that helps find use-after-free and heap-buffer-overflow bugs. It is supported from Android 11 if you enable it. Once enabled, GWP-ASan intercepts a randomly-chosen subset of heap allocations, and places them into a special region that catches difficult-to-detect heap memory corruption bugs.</string>
+    <string name="performance_gwp_asan_hint_2">GWP-ASan introduces a small, fixed RAM overhead when enabled. This overhead is decided by the Android system and is currently approximately 70 kibibytes (KiB) for each affected process.</string>
+    <string name="performance_gwp_asan_hint_3">It is enabled for this app. Press the button below and check logs if the app crashes. You have a small chance of seeing GWP-ASan report on crash.</string>
     <string name="performance_hint_neural">Android 11 expands and improves the Neural Networks API (NNAPI).</string>
     <string name="performance_wireless_debugging">Android 11 supports wireless debugging via ADB</string>
 

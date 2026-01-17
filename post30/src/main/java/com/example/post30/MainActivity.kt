@@ -25,6 +25,7 @@ import com.example.post30.ui.screen.privacy.location.LocationScreen
 import com.example.post30.ui.screen.newfeatures.media.MediaScreen
 import com.example.post30.ui.screen.newfeatures.network.NetworkCapabilitiesScreen
 import com.example.post30.ui.screen.newfeatures.NewFeaturesScreen
+import com.example.post30.ui.screen.newfeatures.gwpasan.GwpAsanScreen
 import com.example.post30.ui.screen.newfeatures.performance.PerformanceScreen
 import com.example.post30.ui.screen.privacy.packagevisibility.PackageVisibilityScreen
 import com.example.post30.ui.screen.privacy.permissions.PermissionsScreen
@@ -97,6 +98,7 @@ fun App(viewModel: AppViewModel) {
         when (viewModel.currentScreen.value) {
             is Screen.Audit -> AuditScreen(viewModel.appOps.value)
             is Screen.Conversations -> ConversationsScreen()
+            is Screen.GwpAsan -> GwpAsanScreen()
             is Screen.Location -> LocationScreen()
             is Screen.Main -> MainScreen(
                 onScreenSelected = viewModel::navigateTo
@@ -109,7 +111,10 @@ fun App(viewModel: AppViewModel) {
             )
 
             is Screen.PackageVisibility -> PackageVisibilityScreen()
-            is Screen.Performance -> PerformanceScreen()
+            is Screen.Performance -> PerformanceScreen {
+                viewModel.navigateTo(Screen.GwpAsan)
+            }
+
             is Screen.Permissions -> PermissionsScreen()
             is Screen.Privacy -> PrivacyScreen(
                 onScreenSelected = viewModel::navigateTo

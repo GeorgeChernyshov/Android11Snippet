@@ -16,6 +16,7 @@
     <application
         android:allowBackup="true"
         android:fullBackupContent="@xml/backup_rules"
+        android:gwpAsanMode="always"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:name=".Post30Application"

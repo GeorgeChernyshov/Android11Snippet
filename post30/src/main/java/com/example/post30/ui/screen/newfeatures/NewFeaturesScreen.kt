@@ -1,6 +1,7 @@
 package com.example.post30.ui.screen.newfeatures
 
 import android.content.Intent
+import android.os.Build
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -61,10 +62,12 @@ fun NewFeaturesScreen(onScreenSelected: (Screen) -> Unit) {
                     Text(stringResource(R.string.label_security))
                 }
 
-                Button(onClick = {
-                    onScreenSelected(Screen.Performance)
-                }) {
-                    Text(stringResource(R.string.label_performance))
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    Button(onClick = {
+                        onScreenSelected(Screen.Performance)
+                    }) {
+                        Text(stringResource(R.string.label_performance))
+                    }
                 }
             }
         }
