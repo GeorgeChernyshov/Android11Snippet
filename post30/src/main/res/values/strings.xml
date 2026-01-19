@@ -16,6 +16,7 @@
     <string name="label_privacy">Privacy</string>
     <string name="label_security">Security</string>
     <string name="label_storage">Storage</string>
+    <string name="label_text">Text and Input</string>
 
     <!-- common buttons -->
     <string name="button_go_next">Go Next</string>
@@ -139,4 +140,9 @@
     <string name="security_prompt_device_subtitle">Use your device PIN, Pattern, or Password.</string>
     <string name="security_prompt_strong_title">Secure Payment (Strong Biometric Only)</string>
     <string name="security_prompt_strong_subtitle">Authenticate using strong biometrics (fingerprint/face).</string>
+
+    <!-- text -->
+    <string name="text_ime_edittext_label">Tap here to focus and show IME</string>
+    <string name="text_ime_hide_button">Hide IME</string>
+    <string name="text_ime_show_button">Show IME</string>
 </resources>

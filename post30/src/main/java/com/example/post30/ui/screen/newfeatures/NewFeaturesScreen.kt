@@ -69,6 +69,14 @@ fun NewFeaturesScreen(onScreenSelected: (Screen) -> Unit) {
                         Text(stringResource(R.string.label_performance))
                     }
                 }
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    Button(onClick = {
+                        onScreenSelected(Screen.Text)
+                    }) {
+                        Text(stringResource(R.string.label_text))
+                    }
+                }
             }
         }
     )

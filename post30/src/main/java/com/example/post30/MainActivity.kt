@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.view.WindowCompat
 import com.example.post30.ui.AppViewModel
 import com.example.post30.ui.navigation.Screen
 import com.example.post30.ui.screen.MainScreen
@@ -27,6 +28,7 @@ import com.example.post30.ui.screen.newfeatures.network.NetworkCapabilitiesScree
 import com.example.post30.ui.screen.newfeatures.NewFeaturesScreen
 import com.example.post30.ui.screen.newfeatures.gwpasan.GwpAsanScreen
 import com.example.post30.ui.screen.newfeatures.performance.PerformanceScreen
+import com.example.post30.ui.screen.newfeatures.text.TextScreen
 import com.example.post30.ui.screen.privacy.packagevisibility.PackageVisibilityScreen
 import com.example.post30.ui.screen.privacy.permissions.PermissionsScreen
 import com.example.post30.ui.screen.privacy.PrivacyScreen
@@ -39,6 +41,8 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        WindowCompat.setDecorFitsSystemWindows(window, false)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             val appOpsCallback = object : AppOpsManager.OnOpNotedCallback() {
@@ -122,6 +126,7 @@ fun App(viewModel: AppViewModel) {
 
             is Screen.Security -> {}
             is Screen.Storage -> StorageScreen()
+            is Screen.Text -> TextScreen()
         }
     }
 }
