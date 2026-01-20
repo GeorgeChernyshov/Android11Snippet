@@ -26,6 +26,7 @@
         tools:targetApi="30">
 
         <activity android:name="com.example.post30.MainActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

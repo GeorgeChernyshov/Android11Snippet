@@ -143,6 +143,10 @@
 
     <!-- text -->
     <string name="text_ime_edittext_label">Tap here to focus and show IME</string>
+    <string name="text_ime_control_hint">Starting with Android 11, you can directly control the system bars, including keyboard</string>
+    <string name="text_ime_custom_animation_button">Show IME with custom animation</string>
     <string name="text_ime_hide_button">Hide IME</string>
+    <string name="text_ime_hint_new">Android 11 introduced window inset animation listener, which allow your UI to precisely react to external changes, like keyboard display</string>
+    <string name="text_ime_hint_old">Prior to Android 11 you had no way of watching the inset animations, so best you could do is changing your screen after the animation is done</string>
     <string name="text_ime_show_button">Show IME</string>
 </resources>
