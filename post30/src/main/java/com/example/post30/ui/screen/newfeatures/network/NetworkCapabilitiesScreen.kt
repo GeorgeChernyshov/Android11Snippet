@@ -20,7 +20,9 @@ import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.Scaffold
@@ -44,7 +46,10 @@ import java.net.SocketException
 import kotlin.text.format
 
 @Composable
-fun NetworkCapabilitiesScreen(viewModel: NetworkViewModel = viewModel()) {
+fun NetworkCapabilitiesScreen(
+    viewModel: NetworkViewModel = viewModel(),
+    onNextClick: () -> Unit
+) {
     val context = LocalContext.current
     val connectivityManager = remember {
         context.getSystemService(
@@ -120,6 +125,14 @@ fun NetworkCapabilitiesScreen(viewModel: NetworkViewModel = viewModel()) {
                     downstreamBandwidth = state.value.downstreamBandwidth,
                     upstreamBandwidth = state.value.upstreamBandwidth
                 )
+
+                Spacer(Modifier.height(16.dp))
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    Button(onClick = onNextClick) {
+                        Text(stringResource(R.string.button_go_next))
+                    }
+                }
             }
         }
     )

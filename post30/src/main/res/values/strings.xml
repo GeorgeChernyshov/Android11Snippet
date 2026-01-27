@@ -8,7 +8,7 @@
     <string name="label_location">Location</string>
     <string name="label_main">Android 11 Snippet</string>
     <string name="label_media">Media Controls</string>
-    <string name="label_network">5G Capabilities</string>
+    <string name="label_network">Network</string>
     <string name="label_new_features">New Features and APIs</string>
     <string name="label_package_visibility">Package Visibility</string>
     <string name="label_performance">Performance and Quality</string>
@@ -17,6 +17,7 @@
     <string name="label_security">Security</string>
     <string name="label_storage">Storage</string>
     <string name="label_text">Text and Input</string>
+    <string name="label_wifi_suggest">Wi-Fi Suggest</string>
 
     <!-- common buttons -->
     <string name="button_go_next">Go Next</string>
@@ -149,4 +150,13 @@
     <string name="text_ime_hint_new">Android 11 introduced window inset animation listener, which allow your UI to precisely react to external changes, like keyboard display</string>
     <string name="text_ime_hint_old">Prior to Android 11 you had no way of watching the inset animations, so best you could do is changing your screen after the animation is done</string>
     <string name="text_ime_show_button">Show IME</string>
+
+    <!-- wifi -->
+    <string name="wifi_suggest_connected">You have connected to the suggested network!</string>
+    <string name="wifi_suggest_hint_new">You should see an alert dialog. Note that your phone isn\'t forced to connect to a suggested network - the decision is on OS to make</string>
+    <string name="wifi_suggest_hint_old">You should see a notification with network suggestion. Note that your phone isn\'t forced to connect to a suggested network - the decision is on OS to make</string>
+    <string name="wifi_suggest_hint_passpoint">Android 11 supports suggesting passpoint networks. You should see one in your suggestions list</string>
+    <string name="wifi_suggest_remove_button">Remove Suggestion</string>
+    <string name="wifi_suggest_remove_hint">Since Android 11, you can disconnect from suggested networks by removing the suggestion. Try connecting to a suggested network and pressing a button below</string>
+    <string name="wifi_suggest_title">Android 10 introduced new API for suggesting WiFi networks</string>
 </resources>

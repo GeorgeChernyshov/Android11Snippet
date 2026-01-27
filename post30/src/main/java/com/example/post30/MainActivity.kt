@@ -3,7 +3,6 @@ package com.example.post30
 import android.app.AppOpsManager
 import android.app.AsyncNotedAppOp
 import android.app.SyncNotedAppOp
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -20,13 +19,13 @@ import com.example.post30.ui.AppViewModel
 import com.example.post30.ui.navigation.Screen
 import com.example.post30.ui.screen.MainScreen
 import com.example.post30.ui.screen.privacy.audit.AuditScreen
-import com.example.post30.ui.screen.newfeatures.conversations.ConversationsActivity
 import com.example.post30.ui.screen.newfeatures.conversations.ConversationsScreen
 import com.example.post30.ui.screen.privacy.location.LocationScreen
 import com.example.post30.ui.screen.newfeatures.media.MediaScreen
 import com.example.post30.ui.screen.newfeatures.network.NetworkCapabilitiesScreen
 import com.example.post30.ui.screen.newfeatures.NewFeaturesScreen
 import com.example.post30.ui.screen.newfeatures.gwpasan.GwpAsanScreen
+import com.example.post30.ui.screen.newfeatures.wifisuggest.WifiSuggestScreen
 import com.example.post30.ui.screen.newfeatures.performance.PerformanceScreen
 import com.example.post30.ui.screen.newfeatures.text.TextScreen
 import com.example.post30.ui.screen.privacy.packagevisibility.PackageVisibilityScreen
@@ -109,7 +108,12 @@ fun App(viewModel: AppViewModel) {
             )
 
             is Screen.Media -> MediaScreen()
-            is Screen.Network -> NetworkCapabilitiesScreen()
+            is Screen.Network -> NetworkCapabilitiesScreen(
+                onNextClick = {
+                    viewModel.navigateTo(Screen.WifiSuggest)
+                }
+            )
+
             is Screen.NewFeatures -> NewFeaturesScreen(
                 onScreenSelected = viewModel::navigateTo
             )
@@ -127,6 +131,8 @@ fun App(viewModel: AppViewModel) {
             is Screen.Security -> {}
             is Screen.Storage -> StorageScreen()
             is Screen.Text -> TextScreen()
+            is Screen.WifiSuggest -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
+                WifiSuggestScreen()
         }
     }
 }

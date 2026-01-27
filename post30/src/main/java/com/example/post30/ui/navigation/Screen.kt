@@ -23,4 +23,5 @@ sealed class Screen(val route: String, @StringRes val resourceId: Int) {
     object Security : Screen("security", R.string.label_security)
     object Storage : Screen("storage", R.string.label_storage)
     object Text : Screen("text", R.string.label_text)
+    object WifiSuggest : Screen("wifiSuggest", R.string.label_wifi_suggest)
 }
