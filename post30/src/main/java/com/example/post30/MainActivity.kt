@@ -24,6 +24,7 @@ import com.example.post30.ui.screen.privacy.location.LocationScreen
 import com.example.post30.ui.screen.newfeatures.media.MediaScreen
 import com.example.post30.ui.screen.newfeatures.network.NetworkCapabilitiesScreen
 import com.example.post30.ui.screen.newfeatures.NewFeaturesScreen
+import com.example.post30.ui.screen.newfeatures.graphics.GraphicsScreen
 import com.example.post30.ui.screen.newfeatures.gwpasan.GwpAsanScreen
 import com.example.post30.ui.screen.newfeatures.wifisuggest.WifiSuggestScreen
 import com.example.post30.ui.screen.newfeatures.performance.PerformanceScreen
@@ -101,6 +102,7 @@ fun App(viewModel: AppViewModel) {
         when (viewModel.currentScreen.value) {
             is Screen.Audit -> AuditScreen(viewModel.appOps.value)
             is Screen.Conversations -> ConversationsScreen()
+            is Screen.Graphics -> GraphicsScreen()
             is Screen.GwpAsan -> GwpAsanScreen()
             is Screen.Location -> LocationScreen()
             is Screen.Main -> MainScreen(

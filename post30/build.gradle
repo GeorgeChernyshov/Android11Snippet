@@ -18,6 +18,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         externalNativeBuild {
             cmake {
+                arguments "-DANDROID_PLATFORM=android-${targetSdk}"
                 cppFlags "-std=c++17"
             }
         }

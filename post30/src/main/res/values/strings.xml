@@ -4,6 +4,7 @@
     <!-- screen labels -->
     <string name="label_audit">Data Access Audit</string>
     <string name="label_conversations">Conversations</string>
+    <string name="label_graphics">Graphics</string>
     <string name="label_gwp_asan">GWP-ASan</string>
     <string name="label_location">Location</string>
     <string name="label_main">Android 11 Snippet</string>
@@ -31,6 +32,10 @@
     <!-- conversations -->
     <string name="conversations_new">Start a conversation to see cool new bubble notifications!</string>
     <string name="conversations_old">Start a conversation and you will see a chat notification</string>
+
+    <!-- graphics -->
+    <string name="graphics_image_decoder_button">Decode Image with NDK</string>
+    <string name="graphics_image_decoder_hint">Android 11 introduced NDK ImageDecoder. Try it out!</string>
 
     <!-- location -->
     <string name="location_background_new">Background location permission request should redirect you to app settings</string>
