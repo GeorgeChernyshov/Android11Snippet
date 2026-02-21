@@ -22,6 +22,21 @@ import com.example.post30.ui.bubbles.BubbleActivity
 
 class NotificationHelper(private val context: Context) {
 
+    fun showLoudNotification() {
+        val builder = NotificationCompat.Builder(context, Post30Application.LOUD_CHANNEL)
+            .setContentTitle("New Message")
+            .setContentText("You have a new message")
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setPriority(NotificationCompat.PRIORITY_MAX)
+            .setDefaults(NotificationCompat.DEFAULT_ALL)
+            .setVibrate(longArrayOf(0, 500, 200, 500))
+
+        with(NotificationManagerCompat.from(context)) {
+            // notificationId is a unique int for each notification that you must define
+            notify(simpleNotificationId, builder.build())
+        }
+    }
+
     @RequiresApi(Build.VERSION_CODES.R)
     fun showChatNotification() {
         val sender = Person.Builder()
@@ -127,6 +142,7 @@ class NotificationHelper(private val context: Context) {
 
     companion object {
         var chatNotificationId = 0
+        var simpleNotificationId = 100
 
         private const val REQUEST_CONTENT = 1
         private const val SHORTCUT_ID = "shortcut"

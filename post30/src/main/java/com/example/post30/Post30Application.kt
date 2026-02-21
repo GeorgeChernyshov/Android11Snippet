@@ -22,20 +22,41 @@ class Post30Application : Application() {
                 NotificationChannelGroup(CHAT_GROUP, CHAT_GROUP)
             )
 
-            val name = getString(R.string.notification_chat_channel_name)
-            val descriptionText = getString(R.string.notification_chat_channel_description)
-            val importance = NotificationManager.IMPORTANCE_HIGH
-            val channel = NotificationChannel(CHAT_CHANNEL, name, importance).apply {
-                description = descriptionText
+            notificationManager.createNotificationChannelGroup(
+                NotificationChannelGroup(LOUD_GROUP, LOUD_GROUP)
+            )
+
+            val chatChannel = NotificationChannel(
+                CHAT_CHANNEL,
+                getString(R.string.notification_chat_channel_name),
+                NotificationManager.IMPORTANCE_HIGH
+            ).apply {
+                description = getString(R.string.notification_chat_channel_description)
                 group = CHAT_GROUP
             }
+
+            val loudChannel = NotificationChannel(
+                LOUD_CHANNEL,
+                getString(R.string.notification_loud_channel_name),
+                NotificationManager.IMPORTANCE_HIGH
+            ).apply {
+                description = getString(R.string.notification_loud_channel_description)
+                group = LOUD_GROUP
+                enableVibration(true)
+                vibrationPattern = longArrayOf(0, 500, 200, 500)
+            }
+
             // Register the channel with the system
-            notificationManager.createNotificationChannel(channel)
+            notificationManager.createNotificationChannel(chatChannel)
+            notificationManager.createNotificationChannel(loudChannel)
         }
     }
 
     companion object {
         private const val CHAT_GROUP = "chatGroup"
         const val CHAT_CHANNEL = "chatChannel"
+
+        private const val LOUD_GROUP = "loudGroup"
+        const val LOUD_CHANNEL = "loudChannel"
     }
 }

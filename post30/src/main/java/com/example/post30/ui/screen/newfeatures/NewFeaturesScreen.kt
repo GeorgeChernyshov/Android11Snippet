@@ -83,6 +83,14 @@ fun NewFeaturesScreen(onScreenSelected: (Screen) -> Unit) {
                         Text(stringResource(R.string.label_graphics))
                     }
                 }
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    Button(onClick = {
+                        onScreenSelected(Screen.Camera)
+                    }) {
+                        Text(stringResource(R.string.label_camera))
+                    }
+                }
             }
         }
     )

@@ -3,6 +3,7 @@
 
     <!-- screen labels -->
     <string name="label_audit">Data Access Audit</string>
+    <string name="label_camera">Images and Camera</string>
     <string name="label_conversations">Conversations</string>
     <string name="label_graphics">Graphics</string>
     <string name="label_gwp_asan">GWP-ASan</string>
@@ -28,6 +29,30 @@
     <string name="audit_log_hint">Here, the log of all private data operations is displayed</string>
     <string name="audit_request_location">Request Location</string>
     <string name="audit_request_location_hint">As an example of private data access, try requesting user location</string>
+
+    <!-- camera -->
+    <string name="camera_button_none">None</string>
+    <string name="camera_button_mute_sound_vibration"><![CDATA[Mute S&V]]></string>
+    <string name="camera_button_mute_vibration">Mute Vib</string>
+    <string name="camera_button_send_notification">Send Notification</string>
+    <string name="camera_current_restriction">Current Restriction: %1$s</string>
+    <string name="camera_log_device_is_opened">CameraDevice ID: %1$s is opened.</string>
+    <string name="camera_log_disconnected">CameraDevice ID: %1$s disconnected.</string>
+    <string name="camera_log_error">CameraDevice ID: %1$s error: %2$d.</string>
+    <string name="camera_log_failed_to_access">Failed to access camera: %1$s</string>
+    <string name="camera_log_failed_to_create_capture_session">Failed to create capture session.</string>
+    <string name="camera_log_not_opened">CameraDevice not opened to set restriction.</string>
+    <string name="camera_log_not_active">Camera not active.</string>
+    <string name="camera_log_permission_denied">Camera permission denied.</string>
+    <string name="camera_log_permission_required">Camera permission required: %1$s</string>
+    <string name="camera_log_preview_size_not_determined">Preview size not determined.</string>
+    <string name="camera_log_textureview_not_ready">TextureView not ready for preview.</string>
+    <string name="camera_no_permission">Camera permission not granted. Preview not available.</string>
+    <string name="camera_restriction_none">NONE</string>
+    <string name="camera_restriction_vibration">VIBRATION</string>
+    <string name="camera_restriction_sound_and_vibration">SOUND_AND_VIBRATION</string>
+    <string name="camera_restriction_unknown">UNKNOWN</string>
+    <string name="camera_status">Camera Status: %1$s</string>
 
     <!-- conversations -->
     <string name="conversations_new">Start a conversation to see cool new bubble notifications!</string>
@@ -90,6 +115,8 @@
     <!-- notifications -->
     <string name="notification_chat_channel_name">Chat Notification Channel</string>
     <string name="notification_chat_channel_description">Chat channel description</string>
+    <string name="notification_loud_channel_name">Loud Notification Channel</string>
+    <string name="notification_loud_channel_description">Loud channel description</string>
     <string name="notification_reply">Reply Text. Refresh to check</string>
     <string name="notification_send">Send notification</string>
     <string name="notification_title">My Notification</string>

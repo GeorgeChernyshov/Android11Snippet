@@ -5,6 +5,7 @@ import com.example.post30.R
 
 sealed class Screen(val route: String, @StringRes val resourceId: Int) {
     object Audit : Screen("audit", R.string.label_audit)
+    object Camera : Screen("camera", R.string.label_camera)
     object Conversations : Screen("conversations", R.string.label_conversations)
     object Graphics : Screen("graphics", R.string.label_graphics)
     object GwpAsan : Screen("gwpAsan", R.string.label_gwp_asan)
